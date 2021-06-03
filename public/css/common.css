@@ -5,7 +5,14 @@
 
 html, body {font-family: 'Noto Sans KR', sans-serif;}
 .wrapper {max-width: 1168px; margin: auto;}
+.jumbotron {padding: 3em 2rem;}
+
 
 @media screen and (max-width: 1200px) {
   .wrapper {margin: 0 1em;}
+}
+
+
+@media (min-width: 576px) {
+  .jumbotron {padding: 3em 2em;}
 }
