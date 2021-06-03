@@ -4,20 +4,14 @@ const app = express();
 const path = require('path');
 require('dotenv').config();
 require('./modules/server-init')(app, 3000);
-const session = require('express-session')
+const session = require('./modules/session-init');
 
 /**************** Middlewares ******************/
 const { createError, error404, error500 } = require('./middlewares/error-mw');
 
 
 /**************** Sessions ******************/
-app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}))
+app.use(session());
 
 /**************** Views ******************/
 app.set('view engine', 'ejs');
