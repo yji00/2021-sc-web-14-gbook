@@ -1,7 +1,9 @@
+.gbook-tb {border-bottom: solid 1px #343a40; font-family: 'Sunflower', sans-serif; font-weight: 300;}
+
 .gbook-tb td > img {max-width: 32px; max-height: 32px;}
 .gbook-tb tr > td:nth-child(1) {width: 10%;}
 .gbook-tb tr > td:nth-child(2) {width: 18%;}
-.gbook-tb tr > td:nth-child(4) {width: 50px;}
+.gbook-tb tr > td:nth-child(4) {width: 60px;}
 .gbook-tb tr > td:nth-child(5) {width: 25%;}
 .gbook-tb tr > td:nth-child(6) {width: 15%;}
 

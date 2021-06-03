@@ -1,0 +1,33 @@
+
+<style>
+  .pager-container .page-item.active .page-link {background-color: #aaacb9; border-color: #aaacb9;}
+</style>
+
+<link rel="stylesheet" href="/css/pager/pager.css">
+<nav class="pager-container d-flex justify-content-center my-5">
+	<ul class="pagination pager-wrapper ">
+		<li class="page-item">
+			<a class="page-link" href="/gbook/list/1"><i class="bi-chevron-bar-left"></i></a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/gbook/list/<%= prevPager %>"><i class="bi-chevron-double-left"></i></a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/gbook/list/<%= prevPage %>"><i class="bi-chevron-left"></i></a>
+		</li>
+		<% for(let i=startPage; i<=endPage; i++) { %>
+			<li class="page-item <%= (i === page) ? 'active' : '' %> ">
+				<a class="page-link" href="/gbook/list/<%= i %>"><%= i %></a>
+			</li>
+		<% } %>
+		<li class="page-item">
+			<a class="page-link" href="/gbook/list/<%= nextPage %>"><i class="bi-chevron-right"></i></a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/gbook/list/<%= nextPager %>"><i class="bi-chevron-double-right"></i></a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="/gbook/list/<%= totalPage %>"><i class="bi-chevron-bar-right"></i></a>
+		</li>
+	</ul>
+</nav>
