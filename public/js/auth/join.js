@@ -31,7 +31,7 @@ function showMsg(el, valid, msg) {
 	}
 	else if(valid == 'RESET') {
 		$(el).removeClass('active success danger');
-		$(el).parent().next().removeClass('success').hide().text('');
+		// $(el).parent().next().removeClass('success').hide().text('');
 	}
 	else {
 		$(el).removeClass('danger success').addClass('active');
@@ -45,9 +45,9 @@ function onFocus() {
 	var $el = $(this);
 	var idx = $el.data('id')
 	for(var i=0; i<$input.length; i++) {
-		if(i < idx) fn[i]($input.eq(i));
-		else if(i > idx) showMsg($input.eq(i), 'RESET');
-		else showMsg($el);
+		if(i < idx) fn[i]($input.eq(i)); //위는 검증
+		else if(i > idx) showMsg($input.eq(i), 'RESET'); //아래는 리셋
+		else  showMsg($el);
 	}
 }
 

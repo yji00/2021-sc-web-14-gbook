@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 const { pool } = require('../modules/mysql-init');
 const { upload } = require('../modules/multer-init');
 const { error, alert, transDate, transFrontSrc, makePager } = require('../modules/utils');
@@ -24,12 +25,11 @@ router.get('/idchk/:userid', async(req, res, next) => {
   }
 });
 
-router.get('/signin', (req, res, next) => {
-  res. render('auth/join',  { ...ejs, pageMode: 'LOGIN', pageDesc:  '기존회원분은 아래의 버튼을 클릭하여 로그인 해 주세요.'});
+router.get('/sign', (req, res, next) => {
+  res. render('auth/sign',  { ...ejs, pageMode: 'SIGN', pageDesc:  '회원이 아니신 분은 아래의 버튼을 클릭하여 회원가입 해주세요.'});
 })
 
-router.post('/signin', (req, res, next) => {
-  res. send('로그인처리');
+router.post('/sign', (req, res, next) => {
 })
 
 router.get('/signout', (req, res, next) => {
@@ -41,8 +41,19 @@ router.get('/join', (req, res, next) => {
   res. render('auth/join', { ...ejs, pageDesc: '기존회원분은 아래의 버튼을 클릭하여 로그인 해 주세요.'});
 })
 
-router.post('/join', (req, res, next) => {
-  res. send('회원가입처리');
+router.post('/join', async(req, res, next) => {
+  try{
+    let sql, values;
+    let { userid, userpw, username, email } = req. body;
+    sql = 'INSERT INTO users SET userid=?, userpw=?, username=?, email=?';
+    userpw = await bcrypt.hash(userpw, 5);
+    values = [userid, userpw, username, email];
+    const [r] = await pool.execute(sql, values);
+    res.send (alert('회원가입이 완료되었습니다.', '/'));
+  }
+  catch(err){
+    next(error(err))
+  }
 })
 
 module.exports = router;
