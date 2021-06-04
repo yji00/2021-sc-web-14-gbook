@@ -1,0 +1,10 @@
+.join-wrapper h3.title {font-size: 1.5em; margin: 2em 0; text-align: center; }
+.join-wrapper .list  {margin-bottom: 1em; }
+.join-wrapper .list > .title {margin-bottom: .5em; font-size: 1.125em; color: rgb(36, 29, 73);}
+.join-wrapper .list > .content {}
+.join-wrapper .list > .warning {padding: .5em; display: none; color: #833131;}
+.join-wrapper .list > .warning.success {color: #6092ca;}
+
+.join-wrapper input.active {border: 1px solid #6092ca; background-color: #d1e9fd;}
+.join-wrapper input.danger {border: 1px solid #833131; background-color: rgb(250, 220, 215);}
+.join-wrapper input.success {border: 1px solid #31836a; background-color: #d7faf2;}
