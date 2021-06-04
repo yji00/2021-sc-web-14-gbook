@@ -5,7 +5,7 @@ const { pool } = require('../modules/mysql-init');
 const { upload } = require('../modules/multer-init');
 const { error, alert, transDate, transFrontSrc, makePager } = require('../modules/utils');
 
-const ejs = {
+const ejs = { 
 	tabTitle: 'Express 방명록',
 	pageTitle: 'Express를 활용한 회원인증 서비스',
 	pageDesc: '',
@@ -38,8 +38,9 @@ router.post('/sign', async(req, res, next) => {
     if(r.length ===  1){ //아이디 일치
       compare = await bcrypt.compare(userpw, r[0].userpw);
       if(compare){ //비밀번호 일치
-        
-        res.send(alert('로그인 되었습니다.', '/'));
+          let { id, userid, email, username } = r[0];
+          req.session.user = {id, userid, email, username};
+          res.send(alert('로그인 되었습니다.', '/'));
       }
       else{ //비밀번호 불일치
         
@@ -58,7 +59,9 @@ router.post('/sign', async(req, res, next) => {
 })
 
 router.get('/signout', (req, res, next) => {
-  res. send('로그아웃처리');
+  res.session.destroy();
+  res.locals.user = null;
+  res.send(alert('로그아웃 되었습니다.', '/'));
 })
 
 
