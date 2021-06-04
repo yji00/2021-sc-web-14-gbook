@@ -29,7 +29,32 @@ router.get('/sign', (req, res, next) => {
   res. render('auth/sign',  { ...ejs, pageMode: 'SIGN', pageDesc:  '회원이 아니신 분은 아래의 버튼을 클릭하여 회원가입 해주세요.'});
 })
 
-router.post('/sign', (req, res, next) => {
+router.post('/sign', async(req, res, next) => {
+  try{
+    let sql, values, compare, msg = '아이디와 패스워드를 확인하세요.';
+    let {userid, userpw} = req.body;
+    sql = 'SELECT * FROM users WHERE userid=?';
+    const [r] = await pool.execute(sql, [userid]);  //구조분해 한번만 해서 id가 없을 경우 빈배열을 받는다. (두번하면 아무것도 없다.)
+    if(r.length ===  1){ //아이디 일치
+      compare = await bcrypt.compare(userpw, r[0].userpw);
+      if(compare){ //비밀번호 일치
+        
+        res.send(alert('로그인 되었습니다.', '/'));
+      }
+      else{ //비밀번호 불일치
+        
+        res.send(alert(msg, '/auth/sign'));
+      }
+    }
+    else{ //아이디 불일치
+      res.send(alert(msg, '/auth/sign'));
+      
+    }
+    
+  }
+  catch(err){
+    next(error(err));
+  }
 })
 
 router.get('/signout', (req, res, next) => {
