@@ -1,13 +1,15 @@
 <link rel="stylesheet" href="/css/header.css">
 <header class="header-wrapper">
-	<div class="logo">LOGO</div>
+	<div class="logo">
+		<a href="/">LOGO</a>
+	</div>
 	<div class="navi-wrap">
 		<a href="/gbook">GuestBook</a>
-		<% if(user) { %>  <!-- res.locals.user -->
-		<a href="/auth/signout">SignOut</a>
-		<% } else { %> 
-		<a href="/auth/sign">SignIn</a>
-		<a href="/auth/join">Join</a>
-		<% } %> 
+		<% if(user) { %>
+			<a href="/auth/signout">SignOut</a>
+		<% } else { %>
+			<a href="/auth/sign">SignIn</a>
+			<a href="/auth/join">Join</a>
+		<% } %>
 	</div>
 </header>

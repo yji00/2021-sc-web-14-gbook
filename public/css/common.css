@@ -7,19 +7,18 @@ html, body {font-family: 'Noto Sans KR', sans-serif;}
 .wrapper {max-width: 1168px; margin: auto;}
 .wrapper-sm {max-width: 736px; margin: auto;}
 .wrapper-xs {max-width: 544px; margin: auto;}
-.jumbotron {padding: 3em 2rem;}
 
+.jumbotron {padding: 3em 2em;}
 
 @media screen and (max-width: 1200px) {
-  .wrapper {margin: 0 1em;}
+	.wrapper {width: calc(100% - 1em);}
 }
 
 @media screen and (max-width: 768px) {
-  .wrapper-sm {width: calc(100%-1em);}
+	.wrapper-sm {width: calc(100% - 1em);}
 }
 
-
 @media (min-width: 576px) {
-  .jumbotron {padding: 3em 2em;}
-  .wrapper-xs {width: calc(100%-1em);}
+	.jumbotron {padding: 3em 2em;}
+	.wrapper-xs {width: calc(100% - 1em);}
 }
