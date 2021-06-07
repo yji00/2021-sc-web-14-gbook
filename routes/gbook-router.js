@@ -77,4 +77,19 @@ router.get('/remove/:id', isUser, async (req, res, next) => {
 	}
 });
 
+router.get('/view/:id', isUser, async(req, res, next) => { //마지막에 위치 (주소값을 아이디값으로 인식할 수 있기때문에 )
+	try{
+		let sql, values;
+		sql = 'SELECT G.*, F.savename FROM gbook G LEFT JOIN gbookfile F ON G.id = F.gid WHERE G.id=? AND G.uid=?';
+		const [r] = await pool.execute(sql, [req.params.id, req.session.user.id]);
+		if(r.length == 1){
+			r[0].savename = transFrontSrc(r[0].savename);
+			res.status(200).json({ code: 200, success: true, data: r[0]});
+
+		}else res.status(200).json({ code: 200, success: false, data: null }); //통신 성공 데이타를 못가져옴
+	}catch(err){
+		res.status(500).json({ code: 500, err }); 
+	}
+}); 
+
 module.exports = router;
