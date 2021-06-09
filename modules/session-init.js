@@ -11,7 +11,7 @@ const storeOptions = {
 
 
 const options = {
-  secret: process.env.SESSTION_SALT,
+  secret: process.env.SESSION_SALT,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
