@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const helmet = helmet();
 const path = require('path');
 require('./modules/server-init')(app, 3000);
 const session = require('./modules/session-init');
@@ -13,11 +14,13 @@ const { createError, error404, error500 } = require('./middlewares/error-mw');
 
 
 /**************** Views ******************/
-app.set('view engine', 'ejs');
+app.use('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 app.locals.pretty = true;
 
 /**************** req.body ******************/
+
+app.use(helmet({contentSecurityPolicy: false}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
